@@ -28,7 +28,7 @@ module.exports = {
       "import/prefer-default-export": 0,
       "keyword-spacing": "error",
       "max-classes-per-file": 0,
-      "max-len": 0,
+      "max-len": 80,
       "no-await-in-loop": 0,
       "no-bitwise": 0,
       "no-console": 0,

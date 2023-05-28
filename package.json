@@ -2,28 +2,28 @@
   "name": "ts-node-template",
   "version": "0.0.1",
   "scripts": {
-    "start": "npx ts-node ./src/index.ts"
+    "start": "ts-node ./src/index.ts"
   },
   "dependencies": {
-    "@huggingface/inference": "1",
+    "@huggingface/inference": "2.5.0",
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
     "hnswlib-node": "^1.4.2",
-    "langchain": "^0.0.66"
+    "langchain": "^0.0.84"
   },
   "devDependencies": {
-    "@types/node": "^18.16.3",
-    "@typescript-eslint/eslint-plugin": "^5.51.0",
-    "@typescript-eslint/parser": "^5.51.0",
-    "eslint": "^8.33.0",
+    "@types/node": "^20.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "eslint": "^8.41.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.3",
     "ts-node": "^10.7.0",
-    "tslib": "^2.5.0",
+    "tslib": "^2.5.2",
     "typescript": "^5.0.4"
   }
 }

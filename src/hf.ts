@@ -12,8 +12,8 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const model = new HuggingFaceInference({
-    model: "replit/replit-code-v1-3b",
-    apiKey: process.env.HUGGING_FACE_API_KEY, 
+    model: "mosaicml/mpt-7b-chat",
+    apiKey: process.env.HUGGING_FACE_API_KEY,
 });
 
 const main = async () => {

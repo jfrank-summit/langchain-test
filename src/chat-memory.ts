@@ -21,6 +21,10 @@ import * as readline from 'readline';
 import { VectorStoreRetrieverMemory, ENTITY_MEMORY_CONVERSATION_TEMPLATE, EntityMemory } from "langchain/memory";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
+import { Chroma } from "langchain/vectorstores/chroma";  
+import { VectorStore } from "langchain/dist/vectorstores/base";
+import { PineconeClient } from "@pinecone-database/pinecone";
+import { PineconeStore } from "langchain/vectorstores/pinecone";
 
 dotenv.config();
 
@@ -30,10 +34,20 @@ const initChain = async () => {
         openAIApiKey: process.env.OPENAI_API_KEY,
         modelName: "gpt-3.5-turbo",
     });
-    const vectorStore = new MemoryVectorStore(new OpenAIEmbeddings());
+    const client = new PineconeClient();
+    await client.init({
+        apiKey: process.env.PINECONE_API_KEY || "",
+        environment: "us-west4-gcp",
+        });
+    const pineconeIndex = client.Index("test-index");
+    const vectorStore = await PineconeStore.fromExistingIndex(new OpenAIEmbeddings(),{pineconeIndex});
+    //const vectorStore = new Chroma(new OpenAIEmbeddings(),{collectionName:"test-collection}", })
+    
+    //const vectorStore = await Chroma.fromDocuments([], new OpenAIEmbeddings(), {collectionName:"test-collection}"})
+    
     const memory = new VectorStoreRetrieverMemory({
         // 1 is how many documents to return, you might want to return more, eg. 4
-        vectorStoreRetriever: vectorStore.asRetriever(1),
+        vectorStoreRetriever: vectorStore.asRetriever(4),
         memoryKey: "history",
     });
     const chatPrompt =  PromptTemplate.fromTemplate(`The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.
